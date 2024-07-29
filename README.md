@@ -39,3 +39,31 @@ This project is a .NET 8.0 based application that demonstrates a repository patt
 
 - .NET 8.0 SDK
 - MSSQL Server
+
+### Setup
+
+1. Clone the repository to your local machine:
+   ```sh
+   git clone https://github.com/RanielQuirante/StradaTechnicalInterview.git
+
+2. From the Package Manager Console, target the Infrastructure project
+
+3. Enter the following command to update the database:
+   ```sh
+   Update-Database
+
+### Running the Application
+1. Open the solution in Visual Studio.
+2. Set the Api project as the startup project.
+3. Run the application.
+
+### Dependency Injection
+Dependency injection is configured inside the Program.cs file in the Api project. All necessary services, repositories, and validators are registered here.
+
+### Repositories
+- Repositories are responsible for communicating directly with the ApplicationDbContext.
+- The repository pattern is implemented to provide a clean separation of concerns between data access and business logic.
+
+### Services
+- Services are responsible for business logic and interact with repositories.
+- Validators from FluentValidation are used within services to ensure data integrity.
