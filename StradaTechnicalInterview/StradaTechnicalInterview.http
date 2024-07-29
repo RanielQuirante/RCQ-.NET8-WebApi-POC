@@ -1,0 +1,6 @@
+@StradaTechnicalInterview_HostAddress = http://localhost:5267
+
+GET {{StradaTechnicalInterview_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
