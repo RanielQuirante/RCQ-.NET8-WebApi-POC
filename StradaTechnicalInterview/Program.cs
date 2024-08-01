@@ -2,6 +2,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using StradaTechnicalInterview.Infrastructure.Contexts;
 using StradaTechnicalInterview.MappingProfiles;
+using StradaTechnicalInterview.Middleware;
 using StradaTechnicalInterview.Repositories.Implementations;
 using StradaTechnicalInterview.Repositories.Interfaces;
 using StradaTechnicalInterview.Services.Implementations;
@@ -45,6 +46,8 @@ namespace StradaTechnicalInterview
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

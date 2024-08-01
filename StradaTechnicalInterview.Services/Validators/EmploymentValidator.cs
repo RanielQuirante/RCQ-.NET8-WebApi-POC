@@ -23,10 +23,6 @@ namespace StradaTechnicalInterview.Services.Validators
             RuleFor(x => x.EndDate)
                 .NotNull().WithMessage("End Date is mandatory")
                 .GreaterThan(x => x.StartDate).WithMessage("End Date must be greater than Start Date");
-
-            RuleFor(x => x.UserId)
-                .NotNull().WithMessage("User Id is mandatory")
-                .GreaterThan(0).WithMessage("User Id must be greater than 0");
         }
     }
 }

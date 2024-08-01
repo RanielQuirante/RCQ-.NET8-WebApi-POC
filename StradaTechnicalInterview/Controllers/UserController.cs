@@ -25,21 +25,14 @@ namespace StradaTechnicalInterview.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] UserRequestDto userDto)
         {
-            try
-            {
-                var userId = await _userService.CreateUserAsync(userDto);
+            var userId = await _userService.CreateUserAsync(userDto);
 
-                var createdUserDto = await _userService.GetUserByIdAsync(userId);
+            var createdUserDto = await _userService.GetUserByIdAsync(userId);
 
-                if (createdUserDto == null)
-                    return StatusCode(StatusCodes.Status500InternalServerError, "User created but not found.");
+            if (createdUserDto == null)
+                return StatusCode(StatusCodes.Status500InternalServerError, "User created but not found.");
 
-                return CreatedAtAction(nameof(GetUserById), new { id = userId }, createdUserDto);
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
+            return CreatedAtAction(nameof(GetUserById), new { id = userId }, createdUserDto);
         }
 
         [HttpGet("{id}")]
@@ -55,19 +48,8 @@ namespace StradaTechnicalInterview.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserRequestDto userDto)
         {
-            try
-            {
-                await _userService.UpdateUserAsync(id, userDto);
-                return NoContent();
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            await _userService.UpdateUserAsync(id, userDto);
+            return NoContent();
         }
     }
 }

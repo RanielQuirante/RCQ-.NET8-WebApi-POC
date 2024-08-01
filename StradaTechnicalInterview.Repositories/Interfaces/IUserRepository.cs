@@ -12,8 +12,6 @@ namespace StradaTechnicalInterview.Repositories.Interfaces
 
         Task<List<UserEntity>> GetUsersAsync();
 
-        Task<bool> IsEmailUniqueAsync(string email);
-
         Task UpdateUserAsync(UserEntity user);
     }
 }

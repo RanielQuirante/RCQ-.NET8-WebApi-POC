@@ -18,6 +18,7 @@ namespace StradaTechnicalInterview.Repositories.Interfaces
             return await _context.Users
                 .Include(u => u.Address)
                 .Include(u => u.Employments)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -26,12 +27,8 @@ namespace StradaTechnicalInterview.Repositories.Interfaces
             return await _context.Users
                 .Include(u => u.Address)
                 .Include(u => u.Employments)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id == id);
-        }
-
-        public async Task<bool> IsEmailUniqueAsync(string email)
-        {
-            return !await _context.Users.AnyAsync(u => u.Email == email);
         }
 
         public async Task<int> CreateAddUserAsync(UserEntity user)
@@ -49,7 +46,7 @@ namespace StradaTechnicalInterview.Repositories.Interfaces
 
         public async Task<bool> EmailExistsAsync(string email)
         {
-            return await _context.Users.AnyAsync(u => u.Email == email);
+            return await _context.Users.AsNoTracking().AnyAsync(u => u.Email == email);
         }
     }
 }

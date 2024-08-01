@@ -22,79 +22,35 @@ namespace StradaTechnicalInterview.Controllers
             if (employmentDto == null)
                 return BadRequest("Employment data is required.");
 
-            try
-            {
-                var employmentId = await _employmentService.CreateEmploymentAsync(employmentDto);
-                return CreatedAtAction(nameof(GetEmploymentById), new { id = employmentId }, employmentDto);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            var employmentId = await _employmentService.CreateEmploymentAsync(employmentDto);
+            return CreatedAtAction(nameof(GetEmploymentById), new { id = employmentId }, employmentDto);
         }
 
-        [HttpPut("{employmentId}/{userId}")]
+        [HttpPut("users/{userId}/employments/{employmentId}")]
         public async Task<IActionResult> UpdateEmployment(int employmentId, int userId, [FromBody] EmploymentRequestDto employmentDto)
         {
             if (employmentDto == null)
                 return BadRequest("Employment data is required.");
 
-            try
-            {
-                await _employmentService.UpdateEmploymentAsync(employmentId, userId, employmentDto);
-                return NoContent();
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Errors);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            await _employmentService.UpdateEmploymentAsync(employmentId, userId, employmentDto);
+            return NoContent();
         }
 
         [HttpDelete("{employmentId}")]
         public async Task<IActionResult> DeleteEmployment(int employmentId)
         {
-            try
-            {
-                await _employmentService.DeleteEmployment(employmentId);
-                return NoContent();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            await _employmentService.DeleteEmployment(employmentId);
+            return NoContent();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEmploymentById(int id)
         {
-            try
-            {
-                var employment = await _employmentService.GetEmploymentByIdAsync(id);
-                if (employment == null)
-                    return NotFound($"Employment with ID {id} not found.");
+            var employment = await _employmentService.GetEmploymentByIdAsync(id);
+            if (employment == null)
+                return NotFound($"Employment with ID {id} not found.");
 
-                return Ok(employment);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            return Ok(employment);
         }
     }
 }
