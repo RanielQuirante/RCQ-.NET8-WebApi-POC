@@ -114,6 +114,7 @@ namespace StradaTechnicalInterview
                 app.UseDeveloperExceptionPage();
             }
 
+            // Automatically redirects domain to html
             app.Use(async (context, next) =>
             {
                 if (context.Request.Path == "/")
@@ -123,6 +124,13 @@ namespace StradaTechnicalInterview
                 }
                 await next();
             });
+
+            // If database doesn't exists on the machine, it will deploy it
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+            }
 
             app.UseHttpsRedirection();
 
