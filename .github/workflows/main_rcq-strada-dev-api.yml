@@ -28,11 +28,11 @@ jobs:
         run: dir
 
       - name: Build with dotnet
-        working-directory: ./StradaTechnicalInterview/StradaTechnicalInterview
+        working-directory: ./StradaTechnicalInterview
         run: dotnet build StradaTechnicalInterview.csproj --configuration Release
 
       - name: dotnet publish
-        working-directory: ./StradaTechnicalInterview/StradaTechnicalInterview
+        working-directory: ./StradaTechnicalInterview
         run: dotnet publish StradaTechnicalInterview.csproj -c Release -o "${{ env.PUBLISH_OUTPUT }}"
 
       - name: Upload artifact for deployment job
