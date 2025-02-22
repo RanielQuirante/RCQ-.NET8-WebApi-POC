@@ -1,10 +1,11 @@
-﻿using FluentValidation;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StradaTechnicalInterview.Models.Dtos.Request;
 using StradaTechnicalInterview.Services.Interfaces;
 
 namespace StradaTechnicalInterview.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
