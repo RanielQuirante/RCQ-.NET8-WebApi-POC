@@ -13,8 +13,9 @@ jobs:
   build:
     runs-on: windows-latest
     permissions:
-      contents: read  #This is required for actions/checkout
-
+      contents: read  # This is required for actions/checkout
+    env:
+      PUBLISH_OUTPUT: './myapp'
     steps:
       - uses: actions/checkout@v4
 
@@ -23,19 +24,22 @@ jobs:
         with:
           dotnet-version: '8.x'
 
+      - name: List repository structure
+        run: dir
+
       - name: Build with dotnet
-        working-directory: StradaTechnicalInterview/StradaTechnicalInterview
+        working-directory: ./StradaTechnicalInterview/StradaTechnicalInterview
         run: dotnet build StradaTechnicalInterview.csproj --configuration Release
 
       - name: dotnet publish
-        working-directory: StradaTechnicalInterview/StradaTechnicalInterview
-        run: dotnet publish StradaTechnicalInterview.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        working-directory: ./StradaTechnicalInterview/StradaTechnicalInterview
+        run: dotnet publish StradaTechnicalInterview.csproj -c Release -o "${{ env.PUBLISH_OUTPUT }}"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{ env.PUBLISH_OUTPUT }}
 
   deploy:
     runs-on: windows-latest
@@ -44,8 +48,8 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write  #This is required for requesting the JWT
-      contents: read   #This is required for actions/checkout
+      id-token: write  # This is required for requesting the JWT
+      contents: read   # This is required for actions/checkout
 
     steps:
       - name: Download artifact from build job
@@ -56,9 +60,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{secrets.AZUREAPPSERVICE_CLIENTID_FEEA7A7186994807938482B28671DE75}}
-          tenant-id: ${{secrets.AZUREAPPSERVICE_TENANTID_2C6B2C8666C142C5941F88A875E84559}}
-          subscription-id: ${{secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BD96D49C441D48E785BAA63609B138C2}}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_FEEA7A7186994807938482B28671DE75 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_2C6B2C8666C142C5941F88A875E84559 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BD96D49C441D48E785BAA63609B138C2 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -67,4 +71,3 @@ jobs:
           app-name: 'rcq-strada-dev-api'
           slot-name: 'Production'
           package: .
-          
