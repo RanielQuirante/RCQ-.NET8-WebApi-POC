@@ -111,6 +111,7 @@ namespace StradaTechnicalInterview
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
