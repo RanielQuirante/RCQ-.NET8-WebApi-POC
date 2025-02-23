@@ -60,7 +60,14 @@ namespace StradaTechnicalInterview
             // Add DbContext with SQL Server provider
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly("StradaTechnicalInterview.Infrastructure")));
+                        sqlServerOptions =>
+                        {
+                            sqlServerOptions.MigrationsAssembly("StradaTechnicalInterview.Infrastructure");
+                            sqlServerOptions.EnableRetryOnFailure(
+                                maxRetryCount: 5,
+                                maxRetryDelay: TimeSpan.FromSeconds(10),
+                                errorNumbersToAdd: null);
+                        }));
 
             // Register repositories
             builder.Services.AddScoped<IUserRepository, UserRepository>();
