@@ -30,6 +30,8 @@ namespace StradaTechnicalInterview
 
             // Add services to the container.
             builder.Services.AddSingleton<IConfiguration>(configuration);
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
