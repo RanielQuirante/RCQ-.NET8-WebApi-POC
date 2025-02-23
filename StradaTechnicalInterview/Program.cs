@@ -29,6 +29,7 @@ namespace StradaTechnicalInterview
             configuration.AddCommandLine(args);
 
             // Add services to the container.
+            builder.Services.AddApplicationInsightsTelemetry();
             builder.Services.AddSingleton<IConfiguration>(configuration);
             builder.Services.AddMemoryCache();
             builder.Services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
