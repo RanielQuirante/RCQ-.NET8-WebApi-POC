@@ -63,7 +63,7 @@ namespace WebApiNet8POC
                     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
                         sqlServerOptions =>
                         {
-                            sqlServerOptions.MigrationsAssembly("StradaTechnicalInterview.Infrastructure");
+                            sqlServerOptions.MigrationsAssembly("WebApiNet8POC.Infrastructure");
                             sqlServerOptions.EnableRetryOnFailure(
                                 maxRetryCount: 5,
                                 maxRetryDelay: TimeSpan.FromSeconds(10),
