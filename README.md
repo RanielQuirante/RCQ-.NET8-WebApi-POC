@@ -46,7 +46,7 @@ This project is a .NET 8.0 based application that demonstrates a repository patt
 
 1. Clone the repository to your local machine:
    ```sh
-   https://github.com/RanielQuirante/RCQ-.NET8-WebApi-POC.git
+   git clone https://github.com/RanielQuirante/RCQ-.NET8-WebApi-POC.git
 
 2. From the Package Manager Console, target the Infrastructure project
 
