@@ -2,7 +2,8 @@ Swagger link: https://rcq-strada-dev-api-e0bwbahrfygpfjew.eastasia-01.azurewebsi
 
 # RCQ .NET 8 WebApi POC
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/RanielQuirante/transport-system)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/RanielQuirante/RCQ-.NET8-WebApi-POC/actions/runs/13896968609/job/38879703197)
+[![Static Badge](https://img.shields.io/badge/release-stable_tag_2503.0.0-blue)](https://github.com/RanielQuirante/RCQ-.NET8-WebApi-POC/releases/tag/2503.0.0)
 
 ## Introduction
 
