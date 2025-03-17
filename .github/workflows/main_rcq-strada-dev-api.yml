@@ -27,12 +27,12 @@ jobs:
         run: dir
 
       - name: Build with dotnet
-        working-directory: ./StradaTechnicalInterview
-        run: dotnet build StradaTechnicalInterview.csproj --configuration Release
+        working-directory: ./WebApiNet8POC
+        run: dotnet build WebApiNet8POC.csproj --configuration Release
 
       - name: dotnet publish
-        working-directory: ./StradaTechnicalInterview
-        run: dotnet publish StradaTechnicalInterview.csproj -c Release -o ./myapp
+        working-directory: ./WebApiNet8POC
+        run: dotnet publish WebApiNet8POC.csproj -c Release -o ./myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
