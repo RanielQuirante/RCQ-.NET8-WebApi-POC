@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using StradaTechnicalInterview.Services.Validators;
 using WebApiNet8POC.Models.Dtos.Request;
 using WebApiNet8POC.Repositories.Interfaces;
 
