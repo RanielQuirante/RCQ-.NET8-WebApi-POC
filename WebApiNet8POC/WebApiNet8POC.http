@@ -1,0 +1,6 @@
+@WebApiNet8POC_HostAddress = http://localhost:5267
+
+GET {{WebApiNet8POC_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
